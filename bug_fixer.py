@@ -755,34 +755,34 @@ def main():
     # Display results
     print(f"\n📊 Analysis Complete:")
     print(f"Files analyzed: {len(results['analysis_results'])}")
-    print(f"Bugs found: {sum(r['bugs_found'] for r in results['analysis_results'])}")
+    print(f"Bugs found: {sum(r['bugs_found'] for r in results['analysis_results'])}", "-"*50)
     # print the detailed bug reports
     for result in results['analysis_results']:
         print(f"File: {result['file']}, Bugs: {result['bugs_found']}")
         for bug in result['bugs']:
             print(f"  - {bug['bug_type']} (Line {bug['line_number']}): {bug['description']} (Confidence: {bug['confidence']})")
-    print(f"Auto-fixes attempted: {len(results['fix_results'])}")
+    print(f"Auto-fixes attempted: {len(results['fix_results'])}", "-"*50)
     print(f"\n🔧 Fix Results:")
     for fix in results['fix_results']:
         print(f"  - Success: {fix.success}, Description: {fix.fix_description}, Confidence: {fix.confidence}")
         print(f"    Original Code:\n{fix.original_code}")
         print(f"    Fixed Code:\n{fix.fixed_code}")
-    print(f"JIRA tickets created: {len(results['jira_tickets'])}")
+    print(f"JIRA tickets created: {len(results['jira_tickets'])}", "-"*50)
     print(f"\n📝 JIRA Tickets:")
     for ticket in results['jira_tickets']:
         print(f"  - {ticket['ticket_id']}: {ticket['summary']} (Priority: {ticket['priority']})")
-    print(f"Pipeline status: {results['pipeline_status']}")
-    print(f"\n📈 CI/CD Pipeline Results:")
-    for stage in agent.pipeline_history:
-        print(f"  - {stage.stage}: {'PASSED' if stage.success else 'FAILED'} at {stage.timestamp.strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"\n🔍 Test Suite Generated:")
+    print(f"\n🔍 Test Suite Generated:", "-"*50)
     for test_file, test_code in results['test_results'].items():
         print(f"  - {test_file}:\n{test_code}")
+    print(f"\n📈 CI/CD Pipeline Results:", "-"*50)
+    for stage in agent.pipeline_history:
+        print(f"  - {stage.stage}: {'PASSED' if stage.success else 'FAILED'} at {stage.timestamp.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Pipeline status: {results['pipeline_status']}")
 
     
     # Generate CI/CD configs
     ci_cd_configs = agent.generate_ci_cd_config()
-    print("\n🛠️ CI/CD Configurations:")
+    print("\n🛠️ CI/CD Configurations:", "-"*50)
     print("GitHub Actions:\n", ci_cd_configs['github_actions'])
     print("\nJenkins Pipeline:\n", ci_cd_configs['jenkins_pipeline'])
     print(f"\n🔧 CI/CD configurations generated")
